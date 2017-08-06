@@ -23,7 +23,7 @@
                     @endforeach
                     </tbody>
                 </table>
-                {{ $ranks->links() }}
+                {{ $ranks->render() }}
             </div>
         </div>
     </div>
