@@ -13,7 +13,7 @@ class CreateActivationLogTable extends Migration
      */
     public function up()
     {
-        Schema::create('activationLog', function (Blueprint $table) {
+        Schema::create('activation_log', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('uid')->unique();
             $table->string('email')->unique();
@@ -31,6 +31,6 @@ class CreateActivationLogTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('activationLog');
+        Schema::dropIfExists('activation_log');
     }
 }
