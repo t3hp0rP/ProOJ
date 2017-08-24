@@ -28,6 +28,7 @@ class Point extends Model
      */
     public static function getPoint($id)
     {
-        return Point::where('user_id','=',$id)->select('point')->first()->point;
+        $res = Point::where('user_id','=',$id)->select('point')->first()->point;
+        return $res != '' ? $res : 0;
     }
 }
