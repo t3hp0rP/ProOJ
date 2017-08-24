@@ -11,7 +11,7 @@ class Quiz extends Model
      *
      * @var string
      */
-    protected $table = 'Quiz';
+    protected $table = 'quiz';
 
     /**
      * The attributes that are not allow mass assignment
