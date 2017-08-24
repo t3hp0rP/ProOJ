@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\activationLog;
+use App\ActivationLog;
 use App\Jobs\sendActivateMail;
 use App\User;
 use App\Mail\ActivateUser;
