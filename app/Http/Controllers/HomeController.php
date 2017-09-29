@@ -53,8 +53,9 @@ class HomeController extends Controller
         if($part == null || !Quiz::getPart($part, 1)['status']) //block illegal route
             abort('404');
 
-        $quizDatas = Quiz::where('type','=',Quiz::getPart($part, 1)['content'])->select('id','type','title','content','addr','value','created_at')->get(); //fetch quiz data
-        $answered = Record::getQuizRecord(Auth::id(), Quiz::getPart($part, 1)['content']);
+        $truePart = Quiz::getPart($part, 1)['content'];
+        $quizDatas = Quiz::where('type','=',$truePart)->select('id','type','title','content','addr','value','created_at')->get(); //fetch quiz data
+        $answered = Record::getQuizRecord(Auth::id(), $truePart);
         $bloods = []; //quiz's blood
         $info = []; //isAnswered
         foreach ($quizDatas as $quizData)
@@ -62,7 +63,7 @@ class HomeController extends Controller
         foreach ($answered as $item)
             $info[$item['quiz_id']] = 1;
         return view('layouts/quiz',[
-            'part' => $part,
+            'part' => $truePart,
             'quizDatas' => $quizDatas,
             'bloods' => $bloods,
             'info' => $info,
