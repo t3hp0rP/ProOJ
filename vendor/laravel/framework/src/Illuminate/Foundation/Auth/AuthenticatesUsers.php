@@ -4,6 +4,7 @@ namespace Illuminate\Foundation\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 trait AuthenticatesUsers
 {
@@ -37,6 +38,10 @@ trait AuthenticatesUsers
 
             return $this->sendLockoutResponse($request);
         }
+
+        //add parse test
+        if ($request->get('captcha') == '' || $request->get('captcha') != Session::get('captcha'))
+            return $this->sendFailedParseResponse($request);
 
         if ($this->attemptLogin($request)) {
             return $this->sendLoginResponse($request);
@@ -136,6 +141,25 @@ trait AuthenticatesUsers
     }
 
     /**
+     * Get the failed parse response instance.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function sendFailedParseResponse(Request $request)
+    {
+        $errors = [$this->captcha() => '验证码错误'];
+
+        if ($request->expectsJson()) {
+            return response()->json($errors, 422);
+        }
+
+        return redirect()->back()
+            ->withInput($request->only($this->username(), 'remember'))
+            ->withErrors($errors);
+    }
+
+    /**
      * Get the login username to be used by the controller.
      *
      * @return string
@@ -143,6 +167,16 @@ trait AuthenticatesUsers
     public function username()
     {
         return 'email';
+    }
+
+    /**
+     * Get the captcha to be used by the controller.
+     *
+     * @return string
+     */
+    public function captcha()
+    {
+        return 'captcha';
     }
 
     /**
@@ -155,9 +189,7 @@ trait AuthenticatesUsers
     {
         $this->guard()->logout();
 
-        $request->session()->flush();
-
-        $request->session()->regenerate();
+        $request->session()->invalidate();
 
         return redirect('/');
     }

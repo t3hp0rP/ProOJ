@@ -343,10 +343,9 @@ class SessionGuard implements StatefulGuard, SupportsBasicAuth
      *
      * @param  array  $credentials
      * @param  bool   $remember
-     * @param  bool   $verify //是否只验证 不登陆 --Pr0ph3t
      * @return bool
      */
-    public function attempt(array $credentials = [], $remember = false, $verify = false)
+    public function attempt(array $credentials = [], $remember = false)
     {
         $this->fireAttemptEvent($credentials, $remember);
 
@@ -356,8 +355,7 @@ class SessionGuard implements StatefulGuard, SupportsBasicAuth
         // to validate the user against the given credentials, and if they are in
         // fact valid we'll log the users into the application and return true.
         if ($this->hasValidCredentials($user, $credentials)) {
-            if(!$verify)
-                $this->login($user, $remember);
+            $this->login($user, $remember);
 
             return true;
         }

@@ -537,25 +537,23 @@ if (! function_exists('mix')) {
             $manifestDirectory = "/{$manifestDirectory}";
         }
 
-        $manifestKey = $manifestDirectory ? $manifestDirectory : '/';
-
         if (file_exists(public_path($manifestDirectory.'/hot'))) {
             return new HtmlString("//localhost:8080{$path}");
         }
 
-        if (in_array($manifestKey, $manifests)) {
-            $manifest = $manifests[$manifestKey];
-        } else {
-            if (! file_exists($manifestPath = public_path($manifestDirectory.'/mix-manifest.json'))) {
+        $manifestPath = public_path($manifestDirectory.'/mix-manifest.json');
+
+        if (! isset($manifests[$manifestPath])) {
+            if (! file_exists($manifestPath)) {
                 throw new Exception('The Mix manifest does not exist.');
             }
 
-            $manifests[$manifestKey] = $manifest = json_decode(
-                file_get_contents($manifestPath), true
-            );
+            $manifests[$manifestPath] = json_decode(file_get_contents($manifestPath), true);
         }
 
-        if (! array_key_exists($path, $manifest)) {
+        $manifest = $manifests[$manifestPath];
+
+        if (! isset($manifest[$path])) {
             throw new Exception(
                 "Unable to locate Mix file: {$path}. Please check your ".
                 'webpack.mix.js output paths and try again.'
@@ -780,18 +778,18 @@ if (! function_exists('trans')) {
     /**
      * Translate the given message.
      *
-     * @param  string  $id
+     * @param  string  $key
      * @param  array   $replace
      * @param  string  $locale
-     * @return \Illuminate\Contracts\Translation\Translator|string
+     * @return \Illuminate\Contracts\Translation\Translator|string|array|null
      */
-    function trans($id = null, $replace = [], $locale = null)
+    function trans($key = null, $replace = [], $locale = null)
     {
-        if (is_null($id)) {
+        if (is_null($key)) {
             return app('translator');
         }
 
-        return app('translator')->trans($id, $replace, $locale);
+        return app('translator')->trans($key, $replace, $locale);
     }
 }
 
@@ -799,15 +797,15 @@ if (! function_exists('trans_choice')) {
     /**
      * Translates the given message based on a count.
      *
-     * @param  string  $id
+     * @param  string  $key
      * @param  int|array|\Countable  $number
      * @param  array   $replace
      * @param  string  $locale
      * @return string
      */
-    function trans_choice($id, $number, array $replace = [], $locale = null)
+    function trans_choice($key, $number, array $replace = [], $locale = null)
     {
-        return app('translator')->transChoice($id, $number, $replace, $locale);
+        return app('translator')->transChoice($key, $number, $replace, $locale);
     }
 }
 

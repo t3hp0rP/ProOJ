@@ -38,6 +38,23 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('captcha') ? ' has-error' : '' }}">
+                            <label for="captcha" class="col-md-4 control-label">captcha</label>
+
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" name="captcha" required>
+
+                                @if ($errors->has('captcha'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('captcha') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="col-md-2">
+                                <a href="javascript:refreshCaptcha($(this).children())"><img id="captcha" src="{{ url('/captcha/'.random_int(0,10000000)) }}" alt="验证码"></a>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <div class="checkbox">

@@ -17,6 +17,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/captcha/{rand}','CaptchaController@getCaptcha');
+
 Route::get('/rank','HomeController@getRank');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/part/{part}','HomeController@enterPart');

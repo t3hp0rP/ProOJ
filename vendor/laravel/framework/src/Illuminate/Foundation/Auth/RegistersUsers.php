@@ -2,12 +2,9 @@
 
 namespace Illuminate\Foundation\Auth;
 
-use App\Notifications\sendActivateMail;
-use App\Point;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Support\Facades\Notification;
 
 trait RegistersUsers
 {
@@ -52,7 +49,7 @@ trait RegistersUsers
     }
 
     /**
-     * The user has been registered.(注册后置操作)
+     * The user has been registered.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  mixed  $user
@@ -60,18 +57,6 @@ trait RegistersUsers
      */
     protected function registered(Request $request, $user)
     {
-        Point::create([
-            'user_id' => $user->id,
-        ]);
-
-        $code = $this->genCode($user->name); //根据名称获得Uuid
-
-        $this->saveCode($user->id, $code, $user->email);//保存激活码
-
-//        $this->sendMail($user, $code);//直接发送邮件
-//        $user->notify(new sendActivateMail($user->id, $code));//不知道为什么莫名其妙没有加到队列 之后加了redis之后再试试把
-//        Notification::send($user,new sendActivateMail($user->id, $code));//利用Notifications通道发送漂亮的Mail
-        $this->pushJobToQueue($user,$code);
+        //
     }
-
 }

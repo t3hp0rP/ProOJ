@@ -14,7 +14,7 @@ class FlagController extends Controller
     {
         $this->middleware('auth'); //Authorized User Only
         $this->middleware('active');//Active User Only
-        //TODO 根据IP限制频率 参照Auth 根据题目
+        $this->middleware('throttle:15');//Limit the rate of 15times/min
     }
 
     public function index(Request $request)

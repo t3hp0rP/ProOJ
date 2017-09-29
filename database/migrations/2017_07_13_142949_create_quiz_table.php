@@ -29,6 +29,7 @@ class CreateQuizTable extends Migration
 //            $table->integer('second_blood')->nullable();
 //            $table->integer('third_blood')->nullable();//想了想还是觉得根据时间获取比较好。。。避免各种并发问题
             $table->string('flag');
+            $table->boolean('active')->default(False); //is active
             $table->timestamps();
         });
     }

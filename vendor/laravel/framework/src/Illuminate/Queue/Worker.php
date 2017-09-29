@@ -139,9 +139,9 @@ class Worker
                 $this->kill(1);
             });
 
-            $timeout = $this->timeoutForJob($job, $options);
-
-            pcntl_alarm($timeout > 0 ? $timeout + $options->sleep : 0);
+            pcntl_alarm(
+                max($this->timeoutForJob($job, $options), 0)
+            );
         }
     }
 
@@ -343,9 +343,11 @@ class Worker
             // First, we will go ahead and mark the job as failed if it will exceed the maximum
             // attempts it is allowed to run the next time we process it. If so we will just
             // go ahead and mark it as failed now so we do not have to release this again.
-            $this->markJobAsFailedIfWillExceedMaxAttempts(
-                $connectionName, $job, (int) $options->maxTries, $e
-            );
+            if (! $job->hasFailed()) {
+                $this->markJobAsFailedIfWillExceedMaxAttempts(
+                    $connectionName, $job, (int) $options->maxTries, $e
+                );
+            }
 
             $this->raiseExceptionOccurredJobEvent(
                 $connectionName, $job, $e

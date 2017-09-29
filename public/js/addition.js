@@ -78,3 +78,8 @@ var submitFlag = function (obj) {
         }
     })
 };
+
+var refreshCaptcha = function () {
+    var obj = document.getElementById('captcha');
+    obj.src = obj.src.replace(/(captcha\/)(\d*$)/,"$1"+Math.floor(Math.random()*100000000));
+};

@@ -15,6 +15,10 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Database\ConnectionResolverInterface as Resolver;
 
+/**
+ * @mixin \Illuminate\Database\Eloquent\Builder
+ * @mixin \Illuminate\Database\Query\Builder
+ */
 abstract class Model implements ArrayAccess, Arrayable, Jsonable, JsonSerializable, QueueableEntity, UrlRoutable
 {
     use Concerns\HasAttributes,
@@ -946,17 +950,19 @@ abstract class Model implements ArrayAccess, Arrayable, Jsonable, JsonSerializab
     /**
      * Reload the current model instance with fresh attributes from the database.
      *
-     * @return void
+     * @return $this
      */
     public function refresh()
     {
         if (! $this->exists) {
-            return;
+            return $this;
         }
 
         $this->load(array_keys($this->relations));
 
         $this->setRawAttributes(static::findOrFail($this->getKey())->attributes);
+
+        return $this;
     }
 
     /**
@@ -995,6 +1001,17 @@ abstract class Model implements ArrayAccess, Arrayable, Jsonable, JsonSerializab
         return $this->getKey() === $model->getKey() &&
                $this->getTable() === $model->getTable() &&
                $this->getConnectionName() === $model->getConnectionName();
+    }
+
+    /**
+     * Determine if two models are not the same.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model  $model
+     * @return bool
+     */
+    public function isNot(Model $model)
+    {
+        return ! $this->is($model);
     }
 
     /**
