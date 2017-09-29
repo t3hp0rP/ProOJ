@@ -47,7 +47,7 @@ class Quiz extends Model
             if(in_array($tar,$arr))
                 return array('status' => True, 'content' => array_search($tar,$arr));
             else
-                return array('status' => True, 'content' => '');
+                return array('status' => False, 'content' => '');
     }
 
     /**
