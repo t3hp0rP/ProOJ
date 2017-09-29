@@ -29,3 +29,5 @@ Route::get('/activation/{uid}/{activeCode}','Auth\ActivateController@activateUse
 Route::get('/resendMail/{uid}','Auth\ActivateController@resendMail');
 
 Route::post('/flag','FlagController@index');
+
+Route::any('/test','QuizController@addQuiz');
