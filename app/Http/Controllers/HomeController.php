@@ -63,7 +63,7 @@ class HomeController extends Controller
         foreach ($answered as $item)
             $info[$item['quiz_id']] = 1;
         return view('layouts/quiz',[
-            'part' => $truePart,
+            'part' => ucfirst(Quiz::getPart($truePart)['content']),
             'quizDatas' => $quizDatas,
             'bloods' => $bloods,
             'info' => $info,
