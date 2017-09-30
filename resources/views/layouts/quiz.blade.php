@@ -37,7 +37,7 @@
                                                     <br>
                                                     {{ $quizData->content }}
                                                     <br>
-                                                    address : {{ $quizData->addr }}
+                                                    address : <a href="{{ $quizData->addr }}">{{ $quizData->addr }}</a>
                                                     <br>
                                                     <br>
                                                     <form action="#" class="form-horizontal" role="form">
