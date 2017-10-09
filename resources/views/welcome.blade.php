@@ -115,7 +115,7 @@
                     <p style="margin-left: 350px;">--一只还在萌新线挣扎的Pr0ph3t 2017.7.12</p>
                 </div>
                 <div class="links">
-                    <a href="https://Pr0ph3t.com">MyBlog</a>
+                    <a href="http://www.jianshu.com/u/3e298f54f660">简书</a>
                 </div>
 
             </div>

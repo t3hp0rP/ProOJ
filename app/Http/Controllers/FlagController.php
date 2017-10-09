@@ -14,6 +14,7 @@ class FlagController extends Controller
     {
         $this->middleware('auth'); //Authorized User Only
         $this->middleware('active');//Active User Only
+        $this->middleware('ban');//isBan?
         $this->middleware('throttle:15');//Limit the rate of 15times/min
     }
 
