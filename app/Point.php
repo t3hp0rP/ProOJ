@@ -17,7 +17,7 @@ class Point extends Model
      */
     public static function getRank()
     {
-        return Point::join('users','users.id','=','user_point.user_id')->orderBy('point','desc')->select('name','point')->paginate(10);
+        return Point::join('users','users.id','=','user_point.user_id')->orderBy('point','desc')->orderBy('users.id')->select('name','point')->paginate(10);
     }
 
     /**
