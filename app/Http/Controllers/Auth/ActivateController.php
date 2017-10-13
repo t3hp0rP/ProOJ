@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Mail\ActivateUser;
 use App\ActivationLog;
 use App\User;
+use App\Point;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 
@@ -23,6 +24,10 @@ class ActivateController extends Controller
 
             $res->save();
             $user->save();
+
+            Point::create([
+                'user_id' => $uid,
+            ]);
         }
         return redirect('home')->with(['successMessage' => '成功激活!']);
     }

@@ -60,9 +60,9 @@ trait RegistersUsers
      */
     protected function registered(Request $request, $user)
     {
-        Point::create([
-            'user_id' => $user->id,
-        ]);
+//        Point::create([
+//            'user_id' => $user->id,
+//        ]);
         $code = $this->genCode($user->name); //根据名称获得Uuid
         $this->saveCode($user->id, $code, $user->email);//保存激活码
         //$this->sendMail($user, $code);//直接发送邮件
