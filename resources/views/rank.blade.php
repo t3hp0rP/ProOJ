@@ -15,7 +15,7 @@
                     <tbody>
                     @foreach($ranks as $k => $rank)
                         <tr>
-                            <td>{{ $k+1 }}</td>
+                            <td>{{ ($ranks->currentPage() - 1) * 10 + $k + 1 }}</td>
                             <td>{{ $rank->name }}</td>
                             <td>{{ $rank->point }}</td>
                             <td>{{ $rank->major or '暂无数据' }}</td>
