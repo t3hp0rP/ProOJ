@@ -31,7 +31,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $recentlySolveds = $this->getRecentRecord();
         return view('home')->with([
+            'recentlySolveds' => $recentlySolveds->isEmpty() ? 'empty' : $recentlySolveds,
             'errorMessage' => Session::has('errorMessage') ? Session::get('errorMessage') : '',
             'successMessage' => Session::has('successMessage') ? Session::get('successMessage') : '',
         ]);
@@ -41,6 +43,19 @@ class HomeController extends Controller
     {
         $ranks = Point::getRank();
         return view('rank', ['ranks' => $ranks]);
+    }
+
+    /**
+     * Get the recent answer record
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    private function getRecentRecord()
+    {
+        return Record::join('quiz','quiz.id','=','record.quiz_id')
+            ->join('users','users.id','=','record.user_id')
+            ->orderBy('record.created_at','desc')
+            ->select('users.name as userName','quiz.title as quizName','record.created_at as solvedTime')->limit(5)->get();
     }
 
 

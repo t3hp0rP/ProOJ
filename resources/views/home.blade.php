@@ -54,5 +54,33 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Recently Solved</div>
+
+                <div class="panel-body">
+                    <div class="col-md-8 col-md-offset-2">
+                    <table class="table table-hover text-info text-center">
+                        <tbody>
+                        @if($recentlySolveds !== 'empty')
+                            @foreach($recentlySolveds as $recentlySolved)
+                                <tr>
+                                    <td>{{ $recentlySolved->userName }} Solved <span class="label label-success">{{ $recentlySolved->quizName }}</span> at {{ $recentlySolved->solvedTime }}</td>
+                                </tr>
+                            @endforeach
+                        @else
+                            <tr>
+                                <td class="text-center">nothing here</td>
+                            </tr>
+                        @endif
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection

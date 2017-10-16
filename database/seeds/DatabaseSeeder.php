@@ -13,6 +13,9 @@ class DatabaseSeeder extends Seeder
     {
 //         $this->call(UsersTableSeeder::class);
         $this->call(QuizTableSeeder::class);
-        $this->command->info('Quiz Seed success!');
+        $this->command->info('Quiz Seed Success!');
+
+        $this->call(RecordSeeder::class);
+        $this->command->info('Record seed Success!');
     }
 }

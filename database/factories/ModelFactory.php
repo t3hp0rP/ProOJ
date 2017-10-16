@@ -12,28 +12,28 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-//$factory->define(App\User::class, function (Faker\Generator $faker) {
-//    static $password;
-//
-//    return [
-//        'name' => $faker->name,
-//        'email' => $faker->unique()->safeEmail,
-//        'password' => $password ?: $password = bcrypt('secret'),
-//        'remember_token' => str_random(10),
-//    ];
-//});
-//
-//$factory->define(App\User::class, function(Faker\Generator $faker){
-//    $time = $faker->dateTimeThisMonth;
-//    return [
-//        'name' => $faker->name,
-//        'email' => $faker->email,
-//        'password' => bcrypt(str_random(10)),
-//        'phone' => $faker->regexify('/^0?(13[0-9]|15[012356789]|18[0-9]|14[57])[0-9]{8}$/'),
-//        'created_at' => $time,
-//        'updated_at' => $time,
-//    ];
-//});
+$factory->define(App\User::class, function (Faker\Generator $faker) {
+    static $password;
+
+    return [
+        'name' => $faker->name,
+        'email' => $faker->unique()->safeEmail,
+        'password' => $password ?: $password = bcrypt('secret'),
+        'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(App\User::class, function(Faker\Generator $faker){
+    $time = $faker->dateTimeThisMonth;
+    return [
+        'name' => $faker->name,
+        'email' => $faker->email,
+        'password' => bcrypt(str_random(10)),
+        'phone' => $faker->regexify('/^0?(13[0-9]|15[012356789]|18[0-9]|14[57])[0-9]{8}$/'),
+        'created_at' => $time,
+        'updated_at' => $time,
+    ];
+});
 
 $factory->define(App\Quiz::class, function(Faker\Generator $faker){
     $time = $faker->dateTimeThisMonth;
@@ -44,6 +44,19 @@ $factory->define(App\Quiz::class, function(Faker\Generator $faker){
         'addr' => $faker->regexify('/^([1-2][0-5]{2}\.){3}[1-2][0-5]{2}$/'),
         'value' => $faker->numberBetween(100,500),
         'flag' => $faker->regexify('/^flag\{\w{20}\}$/'),
+        'created_at' => $time,
+        'updated_at' => $time,
+    ];
+});
+
+$factory->define(App\Record::class, function (Faker\Generator $faker){
+    $time = $faker->dateTimeThisMonth;
+    return [
+        'user_id' => $faker->numberBetween(1,2),
+        'type' => '0',
+        'quiz_id' => '7',
+        'value' => '200',
+        'src_ip' => $faker->ipv4,
         'created_at' => $time,
         'updated_at' => $time,
     ];
