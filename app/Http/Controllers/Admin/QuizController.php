@@ -22,7 +22,7 @@ class QuizController extends Controller
 
     public static function getQuiz()
     {
-        return Quiz::paginate(10);
+        return Quiz::paginate(10,['*'],'quiz');
     }
 
     private function validator($input,$isUpdate = 0)

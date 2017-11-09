@@ -36,6 +36,6 @@ class User extends Authenticatable
 
     public static function initUser()
     {
-        return User::paginate(10);
+        return User::paginate(10,['*'],'user');
     }
 }
