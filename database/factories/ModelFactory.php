@@ -61,3 +61,11 @@ $factory->define(App\Record::class, function (Faker\Generator $faker){
         'updated_at' => $time,
     ];
 });
+
+$factory->define(App\Admin::class, function (Faker\Generator $faker){
+    return[
+        'name' => 'Pr0ph3t',
+        'password' => bcrypt('123123'),
+        'remember_token' => str_random(10),
+    ];
+});

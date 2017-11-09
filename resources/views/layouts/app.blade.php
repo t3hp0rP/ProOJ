@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/addition.css') }}" rel="stylesheet">
     <style>
         .menu{
             color: #636b6f;

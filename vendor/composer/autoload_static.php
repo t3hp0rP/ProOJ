@@ -350,9 +350,12 @@ class ComposerStaticInitda82c5af8cb5b09d71f808e90b1825dd
     );
 
     public static $classMap = array (
+        'AdminSeeder' => __DIR__ . '/../..' . '/database/seeds/AdminSeeder.php',
+        'AdminsTable' => __DIR__ . '/../..' . '/database/migrations/2017_10_25_192636_AdminsTable.php',
         'App\\ActivationLog' => __DIR__ . '/../..' . '/app/ActivationLog.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\Admin\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/LoginController.php',
         'App\\Http\\Controllers\\Auth\\ActivateController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ActivateController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',

@@ -26,4 +26,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public static function initDetail()
+    {
+        $registerNum = User::where('isActive','=',1)->count();
+        $activeNum = ActivationLog::all()->count();
+        return ['registerNum' => $registerNum, 'activeNum' => $activeNum];
+    }
+
+    public static function initUser()
+    {
+        return User::paginate(10);
+    }
 }

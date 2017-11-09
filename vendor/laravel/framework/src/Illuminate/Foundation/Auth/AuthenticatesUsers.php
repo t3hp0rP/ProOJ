@@ -203,4 +203,9 @@ trait AuthenticatesUsers
     {
         return Auth::guard();
     }
+
+    public function check()
+    {
+        return !(is_null(Auth::guard()->user()) && is_null(Auth::guard('admin')->user()));
+    }
 }

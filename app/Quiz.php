@@ -18,10 +18,10 @@ class Quiz extends Model
      *
      * @var array
      */
-    protected $guarded = ['id'];
+    protected $guarded = [];
 
     /**
-     * Protect My FLAG from serialization
+     * Protect FLAG from serialization
      *
      * @var array
      */

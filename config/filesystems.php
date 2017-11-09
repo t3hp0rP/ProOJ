@@ -46,6 +46,7 @@ return [
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
+            'visibility' => 'public',
         ],
 
         'public' => [
@@ -54,6 +55,12 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
+
+//        'quizFile' => [
+//            'driver' => 'local',
+//            'root' => storage_path('public/static'),
+//            'visibility' => 'public',
+//        ],
 
         's3' => [
             'driver' => 's3',
