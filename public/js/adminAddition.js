@@ -2,11 +2,14 @@
  * Created by Pr0ph3t on 2017/10/26.
  */
 
+var url = 'http://localhost/dev/laravel/ProOJ/public';
+
 $(function () {
-    if ($("#quizId").val() == '')
-        $("#quizForm").attr("action","http://localhost/dev/laravel/ProOJ/public/admin/createQuiz");
+    var quizVal = $("#quizId").val();
+    if (quizVal == '')
+        $("#quizForm").attr("action",url + "/admin/createQuiz");
     else
-        $("#quizForm").attr("action","http://localhost/dev/laravel/ProOJ/public/admin/changeQuiz/"+$("#quizId").val());
+        $("#quizForm").attr("action",url + "/admin/changeQuiz/"+quizVal);
 });
 
 function uploadFile() {
@@ -17,7 +20,7 @@ function uploadFile() {
     formData.append("name",file[0].files[0].name);
     formData.append("_token",$("#_token").val());
     $.ajax({
-        url : 'http://localhost/dev/laravel/ProOJ/public/admin/uploadQuizFile/'+$("#quizId").val(),
+        url : url + '/admin/uploadQuizFile/'+$("#quizId").val(),
         type : 'POST',
         data : formData,
         dataType : 'json',
@@ -49,7 +52,7 @@ function uploadFile() {
 
 $("#removeBtn").click(function () {
     $.ajax({
-        url : 'http://localhost/dev/laravel/ProOJ/public/admin/removeQuizFile/'+$("#quizId").val(),
+        url : url + '/admin/removeQuizFile/'+$("#quizId").val(),
         type : 'GET',
         dataType : 'json',
         beforeSend : function () {
