@@ -30,7 +30,7 @@ class QuizController extends Controller
         if ($isUpdate == 1)
         {
             $titleRule = 'sometimes|unique:quiz';
-            $flagRule = 'somtimes|unique:quiz';
+            $flagRule = 'sometimes|unique:quiz';
         }
         else
         {
