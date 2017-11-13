@@ -10,6 +10,36 @@ $(function () {
         $("#quizForm").attr("action",url + "/admin/createQuiz");
     else
         $("#quizForm").attr("action",url + "/admin/changeQuiz/"+quizVal);
+
+    $(document).on('click',"#removeBtn",function () {
+        var quizId = $("#quizId").val();
+        quizId = quizId != '' ? '/' + quizId : '';
+        $.ajax({
+            url : url + '/admin/removeQuizFile' + quizId,
+            type : 'GET',
+            dataType : 'json',
+            beforeSend : function () {
+                console.log('正在删除');
+            },
+            success : function (reponseStr) {
+                if (reponseStr.code===1){
+                    var input = $("#addr");
+                    $("#removeBtn").addClass('hidden');
+                    input.val("");
+                    input.removeAttr("readonly");
+                    $("#uploadArea").prepend("<input type=\"file\" name=\"file\" id=\"quizFile\" onchange=\"uploadFile()\">");
+                    console.log('成功');
+                }else{
+                    alert("删除失败");
+                    console.log(reponseStr);
+                }
+            },
+            error : function (responseStr) {
+                alert('error');
+                console.log(responseStr);
+            }
+        });
+    });
 });
 
 function uploadFile() {
@@ -51,33 +81,3 @@ function uploadFile() {
         }
     });
 }
-
-$("#removeBtn").click(function () {
-    var quizId = $("#quizId").val();
-    quizId = quizId != '' ? '/' + quizId : '';
-    $.ajax({
-        url : url + '/admin/removeQuizFile' + quizId,
-        type : 'GET',
-        dataType : 'json',
-        beforeSend : function () {
-            console.log('正在删除');
-        },
-        success : function (reponseStr) {
-            if (reponseStr.code===1){
-                var input = $("#addr");
-                $("#removeBtn").addClass('hidden');
-                input.val("");
-                input.removeAttr("readonly");
-                $("#uploadArea").prepend("<input type=\"file\" name=\"file\" id=\"quizFile\" onchange=\"uploadFile()\">");
-                console.log('成功');
-            }else{
-                alert("删除失败");
-                console.log(reponseStr);
-            }
-        },
-        error : function (responseStr) {
-            alert('error');
-            console.log(responseStr);
-        }
-    });
-});
