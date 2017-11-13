@@ -16,11 +16,13 @@ function uploadFile() {
 
     var formData = new FormData();
     var file = $("#quizFile");
+    var quizId = $("#quizId").val();
+    quizId = quizId != '' ? '/' + quizId : '';
     formData.append("file",file[0].files[0]);
     formData.append("name",file[0].files[0].name);
     formData.append("_token",$("#_token").val());
     $.ajax({
-        url : url + '/admin/uploadQuizFile/'+$("#quizId").val(),
+        url : url + '/admin/uploadQuizFile' + quizId,
         type : 'POST',
         data : formData,
         dataType : 'json',
@@ -51,8 +53,10 @@ function uploadFile() {
 }
 
 $("#removeBtn").click(function () {
+    var quizId = $("#quizId").val();
+    quizId = quizId != '' ? '/' + quizId : '';
     $.ajax({
-        url : url + '/admin/removeQuizFile/'+$("#quizId").val(),
+        url : url + '/admin/removeQuizFile' + quizId,
         type : 'GET',
         dataType : 'json',
         beforeSend : function () {
