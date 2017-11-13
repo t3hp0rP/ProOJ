@@ -70,7 +70,7 @@ class HomeController extends Controller
             abort('404');
 
         $truePart = Quiz::getPart($part, 1)['content'];
-        $quizDatas = Quiz::where('type','=',$truePart)->select('id','type','title','content','addr','value','created_at')->get(); //fetch quiz data
+        $quizDatas = Quiz::where('type','=',$truePart)->where('active','=',1)->select('id','type','title','content','addr','value','created_at')->get(); //fetch quiz data
         $answered = Record::getQuizRecord(Auth::id(), $truePart);
         $bloods = []; //quiz's blood
         $info = []; //isAnswered
