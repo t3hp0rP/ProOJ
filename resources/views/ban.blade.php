@@ -12,7 +12,7 @@
         </div>
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
-                <img src="{{ asset('img/e4f1ec0d4e4c5c9eed3658b25cc1c7b3.jpg') }}" alt="23333">
+                <img src="{{ asset('img/ae78c42577af4842e9553abcb62f1858.jpg') }}" alt="23333">
             </div>
         </div>
     </div>
