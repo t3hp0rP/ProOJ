@@ -22,6 +22,14 @@
                                         </div>
                                     </div>
 
+                                    <div class="form-group">
+                                        <label for="schoolId" class="col-md-4 control-label">学号</label>
+
+                                        <div class="col-md-4">
+                                            <span id="schoolId" class="form-control" name="schoolId" disabled>{{ $info['schoolId'] }}</span>
+                                        </div>
+                                    </div>
+
                                     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                         <label for="password" class="col-md-4 control-label">Password</label>
 

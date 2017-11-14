@@ -61,6 +61,7 @@ class UserController extends Controller
             if($data['phone'] == Auth::user()->phone)
                 unset($data['phone']);
             unset($data['email']);
+            unset($data['schoolId']);
             if($data['new_password'] == false && $data['new_password_confirmation'] == false)
             {
                 unset($data['new_password']);
@@ -96,6 +97,7 @@ class UserController extends Controller
         return view('userCenterChange',[
             'info' => [
                 'email' => $info['email'],
+                'schoolId' => $info['schoolId'],
                 'name' => $info['name'],
                 'phone' => $info['phone'],
             ]

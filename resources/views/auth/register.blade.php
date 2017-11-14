@@ -24,6 +24,20 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('schoolId') ? ' has-error' : '' }}">
+                            <label for="schoolId" class="col-md-4 control-label">学号</label>
+
+                            <div class="col-md-6">
+                                <input id="schoolId" type="text" class="form-control" name="schoolId" value="{{ old('schoolId') }}" required>
+
+                                @if ($errors->has('schoolId'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('schoolId') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 

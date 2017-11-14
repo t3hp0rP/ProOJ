@@ -28,6 +28,14 @@
                             </div>
 
                             <div class="row">
+                                <label for="schoolId" class="col-md-2 control-label col-md-offset-3 text-right">学号</label>
+
+                                <div class="col-md-1">
+                                    <span id="schoolId" name="schoolId">{{ Auth::user()->schoolId }}</span>
+                                </div>
+                            </div>
+
+                            <div class="row">
                                 <label for="name" class="col-md-2 control-label col-md-offset-3 text-right">Name</label>
 
                                 <div class="col-md-1">
