@@ -43,6 +43,7 @@
                                                     <tr>
                                                         <th>id</th>
                                                         <th>name</th>
+                                                        <th>schoolID</th>
                                                         <th>email</th>
                                                         <th>phone</th>
                                                         <th>isActive</th>
@@ -55,6 +56,7 @@
                                                     <tr>
                                                         <td>{{ ($users->currentPage() - 1) * 10 + $k + 1 }}</td>
                                                         <td>{{ $user->name }}</td>
+                                                        <td>{{ $user->schoolId }}</td>
                                                         <td>{{ $user->email }}</td>
                                                         <td>{{ $user->phone }}</td>
                                                         <td>{{ $user->isActive }}</td>
