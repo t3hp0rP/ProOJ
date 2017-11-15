@@ -72,7 +72,7 @@ class UserController extends Controller
                 'new_password' => 'sometimes|required|string|min:6|confirmed',
                 'new_password_confirmation' => 'sometimes|required|string|min:6',
                 'password' => 'required|string|min:6',
-                'phone' => 'sometimes|required|mobile|unique:users'
+                'phone' => 'sometimes|required|regex:/^1[34578][0-9]{9}$/|unique:users'
             ],[
                 'mobile' => 'The :attribute number is invalid'
             ]);
