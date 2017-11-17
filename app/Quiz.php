@@ -60,7 +60,7 @@ class Quiz extends Model
      */
     public static function verifyFlag($type,$name,$flag)
     {
-        return !static::where(['type' => $type, 'id' => $name, 'flag' => $flag])->get()->isEmpty();
+        return !static::where(['type' => $type, 'id' => $name, 'flag' => $flag, 'active' => '1'])->get()->isEmpty();
     }
 
     /**
